@@ -63,6 +63,21 @@ class Kelas extends CI_Controller
 		$this->School->tambahSiswa($data, 'siswa');
 		redirect('Kelas/tampil_siswa');
 	}
+
+	//membuaty function hapus 
+	public function hapus($id)
+	{
+		$where = array('id_kelas' => $id);
+		$this->School->hapusKelas($where, 'kelas');
+		redirect('Kelas/index');
+	}
+
+	public function hapus_siswa($id)
+	{
+		$where = array('id' => $id);
+		$this->School->hapus_siswa($where, 'siswa');
+		redirect('Kelas/tampil_siswa');
+	}
 }
 
 /* End of file Controllername.php */
