@@ -34,7 +34,7 @@ class Kelas extends CI_Controller
 			'jurusan' => $this->input->post('jurusan'),
 		);
 		$this->School->tambahKelas($data, 'kelas');
-		redirect('kelas/index');
+		redirect('DataKelas');
 	}
 
 	//Menampilkan data siswa 
@@ -61,7 +61,7 @@ class Kelas extends CI_Controller
 			'id_kelas' => $this->input->post('id_kelas'),
 		);
 		$this->School->tambahSiswa($data, 'siswa');
-		redirect('Kelas/tampil_siswa');
+		redirect('DataSiswa');
 	}
 
 	//membuaty function hapus 
@@ -69,14 +69,71 @@ class Kelas extends CI_Controller
 	{
 		$where = array('id_kelas' => $id);
 		$this->School->hapusKelas($where, 'kelas');
-		redirect('Kelas/index');
+		redirect('DataKelas');
 	}
 
 	public function hapus_siswa($id)
 	{
 		$where = array('id' => $id);
 		$this->School->hapus_siswa($where, 'siswa');
-		redirect('Kelas/tampil_siswa');
+		redirect('DataSiswa');
+	}
+
+	public function edit_kelas($id)
+	{
+		$where = array('id_kelas' => $id);
+		$data['kelas'] = $this->School->edit_dataKelas($where, 'kelas')->result();
+		$this->load->view('editKelas', $data);
+	}
+
+	public function update_kelas()
+	{
+		$id = $this->input->post('id_kelas');
+		$kelas = $this->input->post('kelas');
+		$jurusan = $this->input->post('jurusan');
+
+		$data = array(
+			'kelas' => $kelas,
+			'jurusan' => $jurusan,
+		);
+
+		$where = array(
+			'id_kelas' => $id
+		);
+
+		$this->School->update_dataKelas($where, $data, 'kelas');
+		redirect('DataKelas');
+	}
+
+	public function edit_siswa($id)
+	{
+		$where = array('id' => $id);
+		$data['kelas'] = $this->School->getNamaKelas();
+		$data['siswa'] = $this->School->edit_datasiswa($where, 'siswa')->result();
+		$this->load->view('editSiswa', $data);
+	}
+
+	public function update_siswa()
+	{
+		$id = $this->input->post('id');
+		$nama = $this->input->post('nama');
+		$no_telp = $this->input->post('no_telp');
+		$alamat = $this->input->post('alamat');
+		$id_kelas = $this->input->post('id_kelas');
+
+		$data = array(
+			'nama' => $nama,
+			'no_telp' => $no_telp,
+			'alamat' => $alamat,
+			'id_kelas' => $id_kelas
+		);
+
+		$where = array(
+			'id' => $id
+		);
+
+		$this->School->update_dataSiswa($where, $data, 'siswa');
+		redirect('DataSiswa');
 	}
 }
 

@@ -26,8 +26,8 @@
                     <td><?= $row->kelas ?></td>
                     <td><?= $row->jurusan ?></td>
                     <td>
-                        <?= anchor('Kelas/edit' . $row->id_kelas, 'Edit'); ?>
-                        <?= anchor('Kelas/hapus' . $row->id_kelas, 'Hapus'); ?>
+                        <?= anchor('Kelas/edit_kelas/' . $row->id_kelas, 'Edit'); ?>
+                        <?= anchor('Kelas/hapus/' . $row->id_kelas, 'Hapus'); ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

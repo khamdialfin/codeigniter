@@ -48,7 +48,29 @@ class School extends CI_Model
 	public function hapus_siswa($where, $siswa)
 	{
 		$this->db->where($where);
-		$this->db->where($siswa);
+		$this->db->delete($siswa);
+	}
+
+	public function edit_dataKelas($where, $table)
+	{
+		return $this->db->get_where($table, $where);
+	}
+
+	public function update_dataKelas($where, $data, $table)
+	{
+		$this->db->where($where);
+		$this->db->update($table, $data);
+	}
+
+	public function edit_dataSiswa($where, $table)
+	{
+		return $this->db->get_where($table, $where);
+	}
+
+	public function update_dataSiswa($where, $data, $table)
+	{
+		$this->db->where($where);
+		$this->db->update($table, $data);
 	}
 }
 

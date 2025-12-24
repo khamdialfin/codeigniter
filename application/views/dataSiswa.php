@@ -29,8 +29,8 @@
                     <td><?= $row->kelas ?></td>
                     <td><?= $row->jurusan ?></td>
                     <td>
-                        <?= anchor('Kelas/editSiswa' . $row->id, 'Edit'); ?>
-                        <?= anchor('Kelas/hapus_siswa' . $row->id, 'Hapus'); ?>
+                        <?= anchor('Kelas/edit_siswa/' . $row->id, 'Edit'); ?>
+                        <?= anchor('Kelas/hapus_siswa/' . $row->id, 'Hapus'); ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
