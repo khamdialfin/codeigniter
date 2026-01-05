@@ -10,6 +10,7 @@
 <body>
     <center>
         <h1>Daftar Kelas SMK N 1 Slawi</h1>
+         <?= anchor('FormKelas', '+ Tambah Baru'); ?>
         <table style="margin:20px auto" border="1">
             <thead>
                 <tr>
@@ -26,8 +27,8 @@
                     <td><?= $row->kelas ?></td>
                     <td><?= $row->jurusan ?></td>
                     <td>
-                        <?= anchor('Kelas/edit_kelas/' . $row->id_kelas, 'Edit'); ?>
-                        <?= anchor('Kelas/hapus/' . $row->id_kelas, 'Hapus'); ?>
+                        <?= anchor('Kelas/edit_kelas/'. $row->id_kelas, 'Edit'); ?>
+                        <?= anchor('Kelas/hapus/'. $row->id_kelas, 'Hapus'); ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

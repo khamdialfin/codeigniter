@@ -10,6 +10,7 @@
 <body>
     <center>
         <h1>Data Siswa SMKN 1 Slawi</h1>
+        <?= anchor('FormSiswa', '+ Tambah Baru'); ?>
         <table border="1">
             <thead>
                 <tr>
@@ -29,8 +30,8 @@
                     <td><?= $row->kelas ?></td>
                     <td><?= $row->jurusan ?></td>
                     <td>
-                        <?= anchor('Kelas/edit_siswa/' . $row->id, 'Edit'); ?>
-                        <?= anchor('Kelas/hapus_siswa/' . $row->id, 'Hapus'); ?>
+                        <?= anchor('Kelas/edit_siswa/'. $row->id, 'Edit'); ?>
+                        <?= anchor('Kelas/hapus_siswa/'. $row->id, 'Hapus'); ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
