@@ -1,43 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
+<div class="card">
+	<div class="p-2 d-flex justify-content-between border">
+		<h4 class="h5">Data Siswa</h4>
+		<div>
+			<a href="<?= base_url('FormSiswa'); ?>" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>Tambah
+				Siswa</a>
+		</div>
+	</div>
+	<div class="card-body">
+		<table class="table table-striped table-bordered" class="display nowrap" id="example2">
+			<thead>
+				<tr class="text-center">
+					<th>Nama</th>
+					<th>Nomer Telepon</th>
+					<th>Alamat</th>
+					<th>Kelas</th>
+					<th>Jurusan</th>
+					<th>Aksi</th>
+				</tr>
+			</thead>
+			<tbody>
+				<?php foreach ($siswa as $row) : ?>
+					<tr class="text-center">
+						<td><?= $row->nama ?></td>
+						<td><?= $row->no_telp ?></td>
+						<td><?= $row->alamat ?></td>
+						<td><?= $row->kelas ?></td>
+						<td><?= $row->jurusan ?></td>
+						<td>
+							<a href="<?= base_url('Siswa/edit_siswa/' . $row->id); ?>" class="btn btn-warning btn-sm"><i
+									class="fas fa-edit"></i></a>
+							<a href="<?= base_url('Siswa/hapus_siswa/' . $row->id); ?>" class="btn btn-danger btn-sm"><i
+									class="fas fa-trash"></i></a>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+</div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Siswa</title>
-</head>
-
-<body>
-    <center>
-        <h1>Data Siswa SMKN 1 Slawi</h1>
-        <?= anchor('FormSiswa', '+ Tambah Baru'); ?>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Nama</th>
-                    <th>Nomer Telepon</th>
-                    <th>Alamat</th>
-                    <th>Kelas</th>
-                    <th>Jurusan</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($siswa as $row) : ?>
-                <tr>
-                    <td><?= $row->nama ?></td>
-                    <td><?= $row->no_telp ?></td>
-                    <td><?= $row->alamat ?></td>
-                    <td><?= $row->kelas ?></td>
-                    <td><?= $row->jurusan ?></td>
-                    <td>
-                        <?= anchor('Kelas/edit_siswa/'. $row->id, 'Edit'); ?>
-                        <?= anchor('Kelas/hapus_siswa/'. $row->id, 'Hapus'); ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </center>
-</body>
-
-</html>
+<script>
+	$(function() {
+		$("#example1").DataTable({
+			"responsive": true,
+			"lengthChange": false,
+			"autoWidth": false,
+			"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+		}).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+		$('#example2').DataTable({
+			"paging": true,
+			"lengthChange": true,
+			"searching": true,
+			"ordering": true,
+			"info": true,
+			"autoWidth": true,
+			"responsive": true,
+		});
+	});
+</script>

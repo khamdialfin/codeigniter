@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -49,13 +49,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'Kelas';
+$route['default_controller'] = 'layout';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['DataKelas'] = 'kelas/index';
 $route['FormKelas'] = 'Kelas/tambah';
-$route['DataSiswa'] = 'Kelas/tampil_siswa';
-$route['FormSiswa'] = 'Kelas/tambah_siswa';
+$route['DataSiswa'] = 'Siswa/index';
+$route['FormSiswa'] = 'Siswa/tambah_siswa';
 $route['FormEditKelas'] = 'Kelas/edit_kelas';
-$route['FormEditSiswa'] = 'Kelas/edit_siswa';
+$route['FormEditSiswa'] = 'Siswa/edit_siswa';
 $route['Dashboard'] = 'Layout/index';
