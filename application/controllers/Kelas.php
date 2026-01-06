@@ -17,6 +17,7 @@ class Kelas extends CI_Controller
 		$data = array(
 			'kelas' => $result
 		);
+
 		$this->load->view('dataKelas', $data);
 	}
 

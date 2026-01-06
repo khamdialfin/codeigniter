@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Data Kelas</title>
-</head>
-
 <body>
     <center>
         <h1>Daftar Kelas SMK N 1 Slawi</h1>
          <?= anchor('FormKelas', '+ Tambah Baru'); ?>
-        <table style="margin:20px auto" border="1">
+        <table class="table table-sm" id="example2">
             <thead>
                 <tr>
                     <td>ID</td>
@@ -36,5 +27,21 @@
         </table>
     </center>
 </body>
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
 
-</html>

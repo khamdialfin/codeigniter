@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'Kelas';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
-$route['DataKelas'] = 'Kelas/index';
+$route['DataKelas'] = 'kelas/index';
 $route['FormKelas'] = 'Kelas/tambah';
 $route['DataSiswa'] = 'Kelas/tampil_siswa';
 $route['FormSiswa'] = 'Kelas/tambah_siswa';
