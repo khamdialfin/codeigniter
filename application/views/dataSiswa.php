@@ -4,6 +4,9 @@
 		<div>
 			<a href="<?= base_url('FormSiswa'); ?>" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>Tambah
 				Siswa</a>
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default" id="tombolTambah">
+               <i class="fas fa-plus"></i> Tambah Siswa
+            </button>	
 		</div>
 	</div>
 	<div class="card-body">
@@ -38,7 +41,7 @@
 		</table>
 	</div>
 </div>
-
+<div class="viewmodal" style="display: none;"></div>
 <script>
 	$(function() {
 		$("#example1").DataTable({
@@ -57,4 +60,19 @@
 			"responsive": true,
 		});
 	});
+</script>
+<script>
+$(document).ready(function() {
+	$('#tombolTambah').click(function(e) {
+		$.ajax({
+			dataType: "json",
+			url: "<?= site_url('Siswa/tambah_siswa'); ?>",
+			success: function (response) {
+				if(respon.sukses) {
+					$('.viewmodal').html(respon.sukses).show();
+				}
+			}
+		});
+	});
+});	
 </script>
