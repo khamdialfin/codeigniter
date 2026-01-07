@@ -38,8 +38,7 @@
   <script src="<?= base_url('adminlte') ?>/dist/js/adminlte.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/3.0.7/js/dataTables.responsive.js"></script>
   <script src="https://cdn.datatables.net/responsive/3.0.7/js/responsive.dataTables.js"></script>
-  <script src="<?= base_url('adminlte') ?>/dist/js/adminlte.min.js"></script>
-  <!-- Page specific script -->
+
   <script>
   	$(function() {
   		$("#example1").DataTable({
@@ -59,6 +58,24 @@
   		});
   	});
   </script>
+  <script>
+  	$(document).ready(function() {
+  		$('#tomboltambah').click(function(e) {
+  			$.ajax({
+  				url: "<?= base_url('Siswa/tambah_siswa') ?>",
+  				dataType: "json",
+  				success: function(response) {
+  					if (response.sukses) {
+  						$('.viewmodal').html(response.sukses).show();
+  						$('#modaltambah').modal('show');
+  					}
+  				}
+  			});
+  		});
+  	})
+  </script>
+
+
   </body>
 
   </html>

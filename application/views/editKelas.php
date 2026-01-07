@@ -10,7 +10,7 @@
 <body>
 	<center>
 		<h1>Form Edit Kelas</h1>
-		<?php foreach($kelas as $row):  ?>
+		<?php foreach ($kelas as $row):  ?>
 			<form action="<?= base_url('Kelas/update_kelas') ?>" method="POST">
 				<table>
 					<td><input type="hidden" name="id_kelas" value="<?= $row->id_kelas ?>"></td>

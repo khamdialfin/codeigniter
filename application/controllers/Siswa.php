@@ -27,9 +27,9 @@ class Siswa extends CI_Controller
 	public function tambah_siswa()
 	{
 		$data['kelas'] = $this->School->getNamaKelas();
-		if($this->input->is_ajax_request() == true) {
+		if ($this->input->is_ajax_request() == true) {
 			$msg = [
-				'sukses' => $this->load->view('form-modalSiswa', '', true)
+				'sukses' => $this->load->view('siswaModal', $data, true)
 			];
 			echo json_encode($msg);
 		}

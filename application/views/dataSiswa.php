@@ -2,8 +2,12 @@
 	<div class="p-2 d-flex justify-content-between border">
 		<h4 class="h5">Data Siswa</h4>
 		<div>
-			<a href="<?= base_url('FormSiswa'); ?>" class="btn btn-primary btn-sm"><i class="fas fa-plus"></i>Tambah
-				Siswa</a>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop"
+				id="tomboltambah"><i class="fas fa-plus"></i>
+				Tambah Siswa
+			</button>
+
 		</div>
 	</div>
 	<div class="card-body">
@@ -38,8 +42,8 @@
 		</table>
 	</div>
 </div>
-
-<script>
+<div class="viewmodal" style="display: none;"></div>
+<!-- <script>
 	$(function() {
 		$("#example1").DataTable({
 			"responsive": true,
@@ -57,5 +61,4 @@
 			"responsive": true,
 		});
 	});
-	nbsvdfhe
-</script>
+</script> -->
