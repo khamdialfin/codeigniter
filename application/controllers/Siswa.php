@@ -39,61 +39,21 @@ class Siswa extends CI_Controller
 	//Menambahkan data siswa
 	public function tambahSiswa_aksi()
 	{
-		// Pastikan request dari AJAX
+		// Wajib AJAX
 		if (!$this->input->is_ajax_request()) {
 			show_404();
 		}
 
-		// Set rules validasi
-		$this->form_validation->set_rules(
-			'nama',
-			'Nama Siswa',
-			'trim|required',
-			[
-				'required' => '%s tidak boleh kosong'
-			]
-		);
+		$this->output->set_content_type('application/json');
 
-		$this->form_validation->set_rules(
-			'no_telp',
-			'No Telepon',
-			'trim|required',
-			[
-				'required' => '%s tidak boleh kosong'
-			]
-		);
+		// Rules validasi
+		$this->form_validation->set_rules('nama', 'Nama Siswa', 'required', ['required' => 'Nama Siswa wajib diisi']);
+		$this->form_validation->set_rules('no_telp', 'No Telepon', 'required', ['required' => 'No Telepon wajib diisi']);
+		$this->form_validation->set_rules('alamat', 'Alamat', 'required', ['required' => 'Alamat wajib diisi']);
+		$this->form_validation->set_rules('id_kelas', 'Kelas', 'required', ['required' => 'Kelas wajib dipilih']);
 
-		$this->form_validation->set_rules(
-			'alamat',
-			'Alamat',
-			'trim|required',
-			[
-				'required' => '%s tidak boleh kosong'
-			]
-		);
+		if ($this->form_validation->run() == TRUE) {
 
-		$this->form_validation->set_rules(
-			'id_kelas',
-			'Kelas',
-			'required',
-			[
-				'required' => '%s harus dipilih'
-			]
-		);
-
-		// Jika validasi gagal
-		if ($this->form_validation->run() == FALSE) {
-			$response = [
-				'status' => false,
-				'error'  => '<div class="alert alert-danger alert-dismissible fade show" role="alert">
-				' . validation_errors() . '
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-				</div>'
-			];
-		} else {
-			// Data yang akan disimpan
 			$data = [
 				'nama'     => $this->input->post('nama', true),
 				'no_telp'  => $this->input->post('no_telp', true),
@@ -101,18 +61,26 @@ class Siswa extends CI_Controller
 				'id_kelas' => $this->input->post('id_kelas', true),
 			];
 
-			// Simpan ke database
 			$this->School->tambahSiswa($data, 'siswa');
+			$msg = [
+				'sukses' => 'Data siswa berhasil ditambahkan'
+			];
+		} else {
 
-			$response = [
-				'status'  => true,
-				'message' => 'Data siswa berhasil ditambahkan'
+			$msg = [
+				'error' => '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>'
+					. validation_errors() .
+					'</div>'
 			];
 		}
 
-		// Kirim response JSON
-		echo json_encode($response);
+		echo json_encode($msg);
 	}
+
+
 
 
 	public function hapus_siswa($id)

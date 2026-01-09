@@ -1,10 +1,10 @@
 <!-- Modal -->
 <div class="modal fade" id="modaltambah" data-backdrop="static" data-keyboard="false" tabindex="-1"
 	aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header bg-primary text-white">
-				<h5 class="modal-title" id="staticBackdropLabel">Form Tambah Atau Edit</h5>
+				<h5 class="modal-title" id="staticBackdropLabel">Form Tambah</h5>
 				<button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -55,20 +55,47 @@
 </div>
 <script>
 	$(document).ready(function() {
-		$('.formSimpan').submit(function(e) {
+
+		$('.formSimpan').on('submit', function(e) {
+			e.preventDefault();
+
 			$.ajax({
-				type: "POST",
+				type: 'POST',
 				url: $(this).attr('action'),
 				data: $(this).serialize(),
-				dataType: "json",
-				success: function(response) {
-					if (response.error) {
-						$('.pesan').html(response.error).show();
-					}
-				}
-			})
+				dataType: 'json',
 
-			return false;
-		})
+				success: function(response) {
+
+					// Jika VALIDASI ERROR
+					if (response.error) {
+						$('.pesan').html(response.error).fadeIn();
+					}
+
+					// Jika BERHASIL
+					if (response.sukses) {
+						Swal.fire({
+							icon: "success",
+							title: "Data Berhasil Disimpan",
+							text: response.sukses,
+						});
+						// reset form
+						$('.formSimpan')[0].reset();
+
+						// tutup modal
+						$('#modaltambah').modal('hide');
+
+						// reload datatable
+						table.ajax.reload(null, false);
+
+					}
+				},
+
+				error: function(xhr) {
+					alert('Terjadi kesalahan AJAX');
+					console.log(xhr.responseText);
+				}
+			});
+		});
 	});
 </script>

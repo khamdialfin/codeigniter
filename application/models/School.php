@@ -16,9 +16,9 @@ class School extends CI_Model
 	}
 
 	//Fungsi untuk menambah data kelas
-	public function tambahKelas($data, $kelas)
+	public function tambahKelasAksi($data, $kelas)
 	{
-		$this->db->insert($kelas, $data);
+		return $this->db->insert($kelas, $data);
 	}
 
 	//Fungsi untuk mengambil data siswa dan join dengan data kelas dari database
@@ -35,7 +35,7 @@ class School extends CI_Model
 	//Fungsi untuk menambah data siswa
 	public function tambahSiswa($data, $siswa)
 	{
-		$this->db->insert($siswa, $data);
+		return $this->db->insert($siswa, $data);
 	}
 
 	//fungsi untuk hapus data kelas

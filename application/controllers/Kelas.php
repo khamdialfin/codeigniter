@@ -8,6 +8,7 @@ class Kelas extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('School');
+		$this->load->library('form_validation');
 	}
 
 	//menampikan data kelas
@@ -29,18 +30,60 @@ class Kelas extends CI_Controller
 	//hanya redirect ke form tambah kelas
 	public function tambah()
 	{
-		$this->load->view('formKelas');
+		if ($this->input->is_ajax_request() == true) {
+			$this->output->set_content_type('application/json');
+			$msg = [
+				'sukses' => $this->load->view('kelasModal', [], true)
+			];
+			echo json_encode($msg);
+		}
 	}
 
 	//Menambahkan data kelas
 	public function tambahKelas()
 	{
-		$data = array(
-			'kelas' => $this->input->post('kelas'),
-			'jurusan' => $this->input->post('jurusan'),
+		// Wajib AJAX
+		if (!$this->input->is_ajax_request()) {
+			show_404();
+		}
+
+		$this->output->set_content_type('application/json');
+
+		// Rules validasi
+		$this->form_validation->set_rules('id_kelas', 'ID', 'required', ['required' => 'ID kelas wajib diisi']);
+		$this->form_validation->set_rules(
+			'kelas',
+			'Kelas',
+			'required',
+			['required' => 'Kelas wajib diisi']
 		);
-		$this->School->tambahKelas($data, 'kelas');
-		redirect('DataKelas');
+		$this->form_validation->set_rules('jurusan', 'Jurusan',  'required', ['required' => 'Jurusan wajib diisi']);
+
+		if ($this->form_validation->run() == TRUE) {
+
+			$data = [
+				'id_kelas' => $this->input->post('id_kelas', true),
+				'kelas' => $this->input->post('kelas', true),
+				'jurusan' => $this->input->post('jurusan', true),
+			];
+
+			$this->School->tambahKelasAksi($data, 'kelas');
+			$msg = [
+				'sukses' => 'data berhasil ditambahkan'
+			];
+		} else {
+
+			$msg = [
+				'error' => '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert">
+                    <span>&times;</span>
+                </button>'
+					. validation_errors() .
+					'</div>'
+			];
+		}
+
+		echo json_encode($msg);
 	}
 
 	//membuaty function hapus 
