@@ -74,6 +74,7 @@ $db['default'] = array(
 	'username' => 'root',
 	'password' => '',
 	'database' => 'school',
+	'port'     => 3307,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
